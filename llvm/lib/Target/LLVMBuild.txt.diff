@@ -1,0 +1,14 @@
+diff --git a/lib/Target/LLVMBuild.txt b/lib/Target/LLVMBuild.txt
+index 98d26bc..6a9a3a6 100644
+--- a/lib/Target/LLVMBuild.txt
++++ b/lib/Target/LLVMBuild.txt
+@@ -16,7 +16,8 @@
+ ;===------------------------------------------------------------------------===;
+ 
+ [common]
+-subdirectories = AArch64 ARM CppBackend Hexagon MSP430 NVPTX Mips PowerPC R600 Sparc SystemZ X86 XCore
++
++subdirectories = AArch64 ARM AVR CppBackend Hexagon MSP430 NVPTX Mips PowerPC R600 Sparc SystemZ X86 XCore
+ 
+ ; This is a special group whose required libraries are extended (by llvm-build)
+ ; with the best execution engine (the native JIT, if available, or the

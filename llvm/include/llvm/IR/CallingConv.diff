@@ -1,0 +1,19 @@
+diff --git a/include/llvm/IR/CallingConv.h b/include/llvm/IR/CallingConv.h
+index af44e8a..caede76 100644
+--- a/include/llvm/IR/CallingConv.h
++++ b/include/llvm/IR/CallingConv.h
+@@ -142,8 +142,13 @@ namespace CallingConv {
+     /// \brief The calling convention used for __cdecl methods on win32.
+     /// Differs from the C calling convention only in that the order of the
+     /// first parameter and the sret parameter are swapped.
+-    X86_CDeclMethod = 80
++    X86_CDeclMethod = 80,
+ 
++    /// AVR_INTR - Calling convention used for AVR interrupt routines.
++    AVR_INTR = 81,
++
++    /// AVR_SIGNAL - Calling convention used for AVR signal routines.
++    AVR_SIGNAL = 82
+   };
+ } // End CallingConv namespace
+ 

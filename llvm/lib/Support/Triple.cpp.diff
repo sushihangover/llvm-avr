@@ -1,0 +1,85 @@
+diff --git a/lib/Support/Triple.cpp b/lib/Support/Triple.cpp
+index 1947f43..5a83891 100644
+--- a/lib/Support/Triple.cpp
++++ b/lib/Support/Triple.cpp
+@@ -21,6 +21,7 @@ const char *Triple::getArchTypeName(ArchType Kind) {
+ 
+   case aarch64: return "aarch64";
+   case arm:     return "arm";
++  case avr:     return "avr";
+   case hexagon: return "hexagon";
+   case mips:    return "mips";
+   case mipsel:  return "mipsel";
+@@ -60,6 +61,8 @@ const char *Triple::getArchTypePrefix(ArchType Kind) {
+   case arm:
+   case thumb:   return "arm";
+ 
++  case avr:     return "avr";
++
+   case ppc64:
+   case ppc64le:
+   case ppc:     return "ppc";
+@@ -97,6 +100,7 @@ const char *Triple::getVendorTypeName(VendorType Kind) {
+   case UnknownVendor: return "unknown";
+ 
+   case Apple: return "apple";
++  case Atmel: return "atmel";
+   case PC: return "pc";
+   case SCEI: return "scei";
+   case BGP: return "bgp";
+@@ -164,6 +168,7 @@ Triple::ArchType Triple::getArchTypeForLLVMName(StringRef Name) {
+   return StringSwitch<Triple::ArchType>(Name)
+     .Case("aarch64", aarch64)
+     .Case("arm", arm)
++    .Case("avr", avr)
+     .Case("mips", mips)
+     .Case("mipsel", mipsel)
+     .Case("mips64", mips64)
+@@ -208,6 +213,7 @@ const char *Triple::getArchNameForAssembler() {
+     .Cases("armv5", "armv5e", "thumbv5", "thumbv5e", "armv5")
+     .Cases("armv6", "thumbv6", "armv6")
+     .Cases("armv7", "thumbv7", "armv7")
++    .Case("avr", "avr")
+     .Case("r600", "r600")
+     .Case("nvptx", "nvptx")
+     .Case("nvptx64", "nvptx64")
+@@ -234,6 +240,7 @@ static Triple::ArchType parseArch(StringRef ArchName) {
+     .StartsWith("armv", Triple::arm)
+     .Case("thumb", Triple::thumb)
+     .StartsWith("thumbv", Triple::thumb)
++    .Case("avr", Triple::avr)
+     .Case("msp430", Triple::msp430)
+     .Cases("mips", "mipseb", "mipsallegrex", Triple::mips)
+     .Cases("mipsel", "mipsallegrexel", Triple::mipsel)
+@@ -258,6 +265,7 @@ static Triple::ArchType parseArch(StringRef ArchName) {
+ static Triple::VendorType parseVendor(StringRef VendorName) {
+   return StringSwitch<Triple::VendorType>(VendorName)
+     .Case("apple", Triple::Apple)
++    .Case("atmel", Triple::Atmel)
+     .Case("pc", Triple::PC)
+     .Case("scei", Triple::SCEI)
+     .Case("bgp", Triple::BGP)
+@@ -674,6 +682,7 @@ static unsigned getArchPointerBitWidth(llvm::Triple::ArchType Arch) {
+   case llvm::Triple::UnknownArch:
+     return 0;
+ 
++  case llvm::Triple::avr:
+   case llvm::Triple::msp430:
+     return 16;
+ 
+@@ -726,6 +735,7 @@ Triple Triple::get32BitArchVariant() const {
+   switch (getArch()) {
+   case Triple::UnknownArch:
+   case Triple::aarch64:
++  case Triple::avr:
+   case Triple::msp430:
+   case Triple::systemz:
+   case Triple::ppc64le:
+@@ -767,6 +777,7 @@ Triple Triple::get64BitArchVariant() const {
+   case Triple::UnknownArch:
+   case Triple::amdil:
+   case Triple::arm:
++  case Triple::avr:
+   case Triple::hexagon:
+   case Triple::le32:
+   case Triple::msp430:

@@ -1,0 +1,20 @@
+diff --git a/include/llvm/ADT/Triple.h b/include/llvm/ADT/Triple.h
+index cfc9e3d..11cd913 100644
+--- a/include/llvm/ADT/Triple.h
++++ b/include/llvm/ADT/Triple.h
+@@ -48,6 +48,7 @@ public:
+ 
+     arm,     // ARM: arm, armv.*, xscale
+     aarch64, // AArch64: aarch64
++    avr,     // AVR: avr
+     hexagon, // Hexagon: hexagon
+     mips,    // MIPS: mips, mipsallegrex
+     mipsel,  // MIPSEL: mipsel, mipsallegrexel
+@@ -77,6 +78,7 @@ public:
+     UnknownVendor,
+ 
+     Apple,
++    Atmel,
+     PC,
+     SCEI,
+     BGP,
