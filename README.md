@@ -1,3 +1,6 @@
+**Note: This project is on hold in terms of  public domain code that can be released. Another variant of this work that is active is located at the Github organization: "[https://github.com/avr-llvm](https://github.com/avr-llvm)"
+**
+
 LLVM with AVR Target
 ========
 
